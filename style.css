@@ -1,0 +1,104 @@
+/* Typography & Base Layout */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 2rem;
+  background-color: #fdfdfd;
+  color: #333;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Call to Action Button with Pulse Animation */
+.call-to-action {
+  padding: 0.8rem 1.4rem;
+  font-size: 1rem;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Skills Section */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.skill-card {
+  background-color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 0 transparent;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 300px;
+  text-align: center;
+  flex: 1;
+}
+
+.skill-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  opacity: 0;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  width: 90%;
+  max-width: 400px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.modal.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto;
+}
+
+.modal-content {
+  text-align: center;
+}
+
+/* Media Query for Small Screens */
+@media (max-width: 600px) {
+  .skill-card {
+    max-width: 90%;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .call-to-action {
+    font-size: 0.9rem;
+  }
+}

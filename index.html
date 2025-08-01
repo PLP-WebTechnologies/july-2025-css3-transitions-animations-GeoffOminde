@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dev Pulse | Ominde's Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Hi, I'm Ominde 👋</h1>
+    <p>Building dynamic, accessible web experiences</p>
+    <button class="call-to-action" onclick="showModal('projectModal')">View Project</button>
+  </header>
+
+  <main>
+    <section class="skills">
+      <div class="skill-card">💻 HTML5 + Semantic Structure</div>
+      <div class="skill-card">🎨 CSS3 Animations & Transitions</div>
+      <div class="skill-card">⚙️ JavaScript DOM & Logic</div>
+    </section>
+
+    <section id="projectModal" class="modal" aria-hidden="true" role="dialog">
+      <div class="modal-content">
+        <h2>Featured Project</h2>
+        <p>Accessible form builder with live validation and animation triggers.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
