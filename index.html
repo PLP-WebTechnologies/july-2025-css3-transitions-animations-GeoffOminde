@@ -2,75 +2,152 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🌋 Volcanic Eruption Explorer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🌋 Earth & Ember Volcanic Dashboard</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <header class="fade-in">
-      <h1>🌋 Volcanic Eruption Explorer</h1>
-      <p>Track eruptions, simulate seismic activity, and visualize volcanic impact.</p>
-    </header>
-
-    <!-- Eruption Input -->
-    <form onsubmit="analyzeEruption(event)">
-      <label for="eruptionInput">🌍 Volcano Name or Region</label>
-      <input type="text" id="eruptionInput" placeholder="e.g. Mount Nyiragongo" required />
-      <button type="submit" class="animated-btn">Analyze Eruption</button>
-    </form>
-
-    <div id="eruptionResult">Last analyzed: --</div>
-
-    <!-- Eruption Intensity Meter -->
-    <div class="intensity-meter">
-      <label>🔥 Eruption Intensity</label>
-      <div class="bar">
-        <div id="intensityFill"></div>
-      </div>
-      <span id="intensityValue">-- VEI</span>
+  <!-- Part 1: CSS-only entrance animation -->
+  <header class="page-header fade-in">
+    <div class="header-inner">
+      <h1>🌋 Earth & Ember Volcanic Dashboard</h1>
+      <p>Track eruptions, simulate seismic activity, and explore animated geology.</p>
     </div>
+  </header>
 
-    <!-- Seismic Simulation -->
-    <div class="seismic-section">
-      <h2>🌐 Seismic Simulation</h2>
-      <button onclick="simulateSeismic('low')">Low Tremor</button>
-      <button onclick="simulateSeismic('high')">Major Quake</button>
+  <main class="container">
+    <!-- Dashboard layout: main + sidebar -->
+    <div class="layout">
+      <!-- MAIN COLUMN -->
+      <section class="main">
+
+        <!-- ANALYSIS PANEL -->
+        <section class="panel">
+          <h2 class="panel-title">Eruption Analysis</h2>
+
+          <!-- Part 2: functions + returns power this form -->
+          <form id="eruptionForm" onsubmit="analyzeEruption(event)" class="form">
+            <label for="eruptionInput">Volcano name or region</label>
+            <input id="eruptionInput" type="text" placeholder="e.g., Mount Nyiragongo, Kīlauea, Eyjafjallajökull" required />
+            <div class="button-row">
+              <button type="submit" class="btn">Analyze</button>
+              <button type="button" class="btn btn-ghost" id="scopeDemoBtn">Scope demo (console)</button>
+            </div>
+          </form>
+
+          <p id="eruptionResult" class="muted">Last analyzed: --</p>
+
+          <!-- Part 2: rendered via JS; CSS transitions animate the fill -->
+          <div class="meter">
+            <div class="meter-head">
+              <strong>Eruption Intensity</strong>
+              <span id="intensityValue" class="meter-value">-- VEI</span>
+            </div>
+            <div class="bar">
+              <div id="intensityFill"></div>
+            </div>
+            <small class="hint">VEI scale from 1 (gentle) to 8 (colossal). Displayed as percentage of VEI 8.</small>
+          </div>
+        </section>
+
+        <!-- SEISMIC SIMULATION -->
+        <section class="panel">
+          <h2 class="panel-title">Seismic Simulation</h2>
+          <p class="muted">Trigger tremors and observe the animated magma box respond.</p>
+
+          <!-- Part 3: JS toggles inline keyframe durations -->
+          <div class="magma-wrap">
+            <div class="magma-box" id="magmaBox" aria-label="Magma pulse box"></div>
+          </div>
+
+          <div class="button-row">
+            <button class="btn" id="pulseFast">Low tremor</button>
+            <button class="btn" id="pulseSlow">Major quake</button>
+            <button class="btn btn-outline" id="pulseDefault">Single pulse</button>
+          </div>
+        </section>
+
+        <!-- INTERACTIVE CARDS + LOADER + MODAL -->
+        <section class="panel">
+          <h2 class="panel-title">Interactive Elements</h2>
+
+          <div class="grid">
+            <!-- Part 3: card flip (CSS + JS class toggle) -->
+            <div class="card-block">
+              <h3 class="card-title">Flip Card</h3>
+              <p class="hint">Click to reveal recovery facts.</p>
+              <div class="flip-card" id="flipCard" tabindex="0" aria-label="Flip card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">Ash Fallout</div>
+                  <div class="flip-card-back">Soil Renewal 🌱</div>
+                </div>
+              </div>
+              <div class="button-row">
+                <button class="btn" id="flipToggle">Toggle Flip</button>
+              </div>
+            </div>
+
+            <!-- Part 3: loader start/stop -->
+            <div class="card-block">
+              <h3 class="card-title">Ash Cloud Loader</h3>
+              <p class="hint">Start/stop the spinner to simulate ongoing eruptions.</p>
+              <div class="loader" id="loader" aria-label="Eruption spinner"></div>
+              <div class="button-row">
+                <button class="btn" id="startLoader">Start</button>
+                <button class="btn" id="stopLoader">Stop</button>
+              </div>
+            </div>
+
+            <!-- Part 3: modal slide/fade -->
+            <div class="card-block">
+              <h3 class="card-title">Hazard Alert</h3>
+              <p class="hint">Opens a sliding, fading modal via JS.</p>
+              <div class="button-row">
+                <button class="btn btn-ghost" id="openModal">Show Alert</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <!-- Part 1: CSS-only glow -->
+        <div class="ember-badge" aria-hidden="true">Ember Active</div>
+
+        <section class="side-card">
+          <h3>Quick Facts</h3>
+          <ul class="list">
+            <li>VEI measures explosive intensity (1–8).</li>
+            <li>Ash improves soil fertility over time.</li>
+            <li>Lava flows reshape landscapes dramatically.</li>
+          </ul>
+        </section>
+
+        <section class="side-card">
+          <h3>Controls</h3>
+          <div class="button-col">
+            <button class="btn btn-outline" id="incEnergy">+ Intensity</button>
+            <button class="btn btn-outline" id="decEnergy">- Intensity</button>
+          </div>
+          <small class="hint">Uses pure functions to clamp and compute values.</small>
+        </section>
+      </aside>
     </div>
+  </main>
 
-    <!-- JS-triggered Animations -->
-    <section class="trigger-box">
-      <button onclick="animateBox()">Trigger Lava Pulse</button>
-      <div class="box" id="animatedBox"></div>
-    </section>
-
-    <section class="card-section">
-      <div class="card" onclick="flipCard(this)">
-        <div class="card-inner">
-          <div class="card-front">🌋 Facts</div>
-          <div class="card-back">🌱 Recovery</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="loader-section">
-      <button onclick="toggleLoader()">Toggle Ash Cloud</button>
-      <div class="loader" id="loader"></div>
-    </section>
-
-    <section class="modal-section">
-      <button onclick="showModal()">Show Alert</button>
-    </section>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal" id="modal">
+  <!-- Part 3: modal (CSS animated; JS toggles .show) -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-content">
-      <p>⚠️ Volcanic activity detected near populated zones!</p>
-      <button onclick="hideModal()">Close</button>
+      <h3 class="modal-title">⚠️ Hazard Advisory</h3>
+      <p>Elevated volcanic activity detected near populated zones. Monitor official channels.</p>
+      <div class="button-row">
+        <button class="btn btn-ghost" id="closeModal">Dismiss</button>
+      </div>
     </div>
   </div>
 
+  <!-- Scripts -->
   <script src="script.js"></script>
 </body>
 </html>
