@@ -1,104 +1,170 @@
-/* Typography & Base Layout */
 body {
-  font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  padding: 2rem;
-  background-color: #fdfdfd;
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff8f0;
   color: #333;
 }
 
-header {
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 2rem;
   text-align: center;
-  margin-bottom: 2rem;
 }
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+/* Fade-in animation */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
 }
 
-/* Call to Action Button with Pulse Animation */
-.call-to-action {
-  padding: 0.8rem 1.4rem;
-  font-size: 1rem;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-/* Skills Section */
-.skills {
+/* Form styling */
+form {
+  margin-top: 1.5rem;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+input {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+button {
+  padding: 0.75rem;
+  background: #d94f2b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+button:hover {
+  background: #b93f1f;
+  transform: scale(1.05);
+}
+
+/* Intensity meter */
+.intensity-meter {
+  margin-top: 2rem;
+}
+.bar {
+  width: 100%;
+  height: 20px;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+#intensityFill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, #ff4d4d, #f9c74f, #90be6d);
+  transition: width 0.5s ease;
+}
+#intensityValue {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+/* Seismic section */
+.seismic-section {
   margin-top: 2rem;
 }
 
-.skill-card {
-  background-color: #fff;
-  padding: 1rem 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 0 0 transparent;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 300px;
-  text-align: center;
-  flex: 1;
+/* Box animation */
+.box {
+  width: 100px;
+  height: 100px;
+  background: #d94f2b;
+  margin: 1rem auto;
+  border-radius: 8px;
+}
+.animate {
+  animation: pulse 0.6s ease;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
 }
 
-.skill-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+/* Card flip */
+.card {
+  width: 150px;
+  height: 100px;
+  perspective: 1000px;
+  margin: 2rem auto;
+  cursor: pointer;
+}
+.card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+.card.flip .card-inner {
+  transform: rotateY(180deg);
+}
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4e9e7;
+  border: 1px solid #d94f2b;
+  border-radius: 8px;
+}
+.card-back {
+  transform: rotateY(180deg);
 }
 
-/* Modal Styles */
+/* Loader */
+.loader {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #d94f2b;
+  border-top: 4px solid transparent;
+  border-radius: 50%;
+  margin: 1rem auto;
+  display: none;
+}
+.loader.spin {
+  display: block;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Modal */
 .modal {
   position: fixed;
-  top: 40%;
+  top: -100%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.95);
+  transform: translateX(-50%);
+  background: white;
+  padding: 1rem;
+  border: 2px solid #d94f2b;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: top 0.5s ease, opacity 0.5s ease;
   opacity: 0;
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  width: 90%;
-  max-width: 400px;
-  z-index: 1000;
-  pointer-events: none;
 }
-
-.modal.visible {
+.modal.show {
+  top: 20%;
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-  pointer-events: auto;
 }
-
 .modal-content {
   text-align: center;
-}
-
-/* Media Query for Small Screens */
-@media (max-width: 600px) {
-  .skill-card {
-    max-width: 90%;
-  }
-
-  h1 {
-    font-size: 1.6rem;
-  }
-
-  .call-to-action {
-    font-size: 0.9rem;
-  }
 }

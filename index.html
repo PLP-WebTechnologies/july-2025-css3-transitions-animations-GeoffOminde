@@ -3,30 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dev Pulse | Ominde's Portfolio</title>
+  <title>🌋 Volcanic Eruption Explorer</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <h1>Hi, I'm Ominde 👋</h1>
-    <p>Building dynamic, accessible web experiences</p>
-    <button class="call-to-action" onclick="showModal('projectModal')">View Project</button>
-  </header>
+  <div class="container">
+    <header class="fade-in">
+      <h1>🌋 Volcanic Eruption Explorer</h1>
+      <p>Track eruptions, simulate seismic activity, and visualize volcanic impact.</p>
+    </header>
 
-  <main>
-    <section class="skills">
-      <div class="skill-card">💻 HTML5 + Semantic Structure</div>
-      <div class="skill-card">🎨 CSS3 Animations & Transitions</div>
-      <div class="skill-card">⚙️ JavaScript DOM & Logic</div>
+    <!-- Eruption Input -->
+    <form onsubmit="analyzeEruption(event)">
+      <label for="eruptionInput">🌍 Volcano Name or Region</label>
+      <input type="text" id="eruptionInput" placeholder="e.g. Mount Nyiragongo" required />
+      <button type="submit" class="animated-btn">Analyze Eruption</button>
+    </form>
+
+    <div id="eruptionResult">Last analyzed: --</div>
+
+    <!-- Eruption Intensity Meter -->
+    <div class="intensity-meter">
+      <label>🔥 Eruption Intensity</label>
+      <div class="bar">
+        <div id="intensityFill"></div>
+      </div>
+      <span id="intensityValue">-- VEI</span>
+    </div>
+
+    <!-- Seismic Simulation -->
+    <div class="seismic-section">
+      <h2>🌐 Seismic Simulation</h2>
+      <button onclick="simulateSeismic('low')">Low Tremor</button>
+      <button onclick="simulateSeismic('high')">Major Quake</button>
+    </div>
+
+    <!-- JS-triggered Animations -->
+    <section class="trigger-box">
+      <button onclick="animateBox()">Trigger Lava Pulse</button>
+      <div class="box" id="animatedBox"></div>
     </section>
 
-    <section id="projectModal" class="modal" aria-hidden="true" role="dialog">
-      <div class="modal-content">
-        <h2>Featured Project</h2>
-        <p>Accessible form builder with live validation and animation triggers.</p>
+    <section class="card-section">
+      <div class="card" onclick="flipCard(this)">
+        <div class="card-inner">
+          <div class="card-front">🌋 Facts</div>
+          <div class="card-back">🌱 Recovery</div>
+        </div>
       </div>
     </section>
-  </main>
+
+    <section class="loader-section">
+      <button onclick="toggleLoader()">Toggle Ash Cloud</button>
+      <div class="loader" id="loader"></div>
+    </section>
+
+    <section class="modal-section">
+      <button onclick="showModal()">Show Alert</button>
+    </section>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <p>⚠️ Volcanic activity detected near populated zones!</p>
+      <button onclick="hideModal()">Close</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
