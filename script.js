@@ -1,13 +1,9 @@
-/* ===========================================
-   Global state (Part 2: scope demonstration)
-   =========================================== */
+/* Global state (Part 2: scope demonstration) */
 let currentVEI = 0;            // 1–8 VEI; 0 until analyzed
 let isLoading = false;
 const DEFAULT_PULSE_MS = 600;
 
-/* ===========================================
-   Part 2: Functions with parameters & returns
-   =========================================== */
+/* Part 2: Functions with parameters & returns */
 
 /** Clamp a number between min and max (pure function) */
 function clamp(n, min, max) {
@@ -44,9 +40,7 @@ function scopeDemo() {
   return "Local variable only";
 }
 
-/* ===========================================
-   Part 3: Animation triggers via JS
-   =========================================== */
+/* Part 3: Animation triggers via JS */
 
 /** Pulse the magma box using inline animation with parameterized duration */
 function pulseMagma(durationMs = DEFAULT_PULSE_MS) {
@@ -101,9 +95,7 @@ function adjustVEI(delta) {
   renderVEI();
 }
 
-/* ===========================================
-   Form handler (uses returns and DOM updates)
-   =========================================== */
+/* Form handler (uses returns and DOM updates) */
 function analyzeEruption(event) {
   event.preventDefault();
   const input = document.getElementById("eruptionInput").value.trim();
@@ -118,9 +110,7 @@ function analyzeEruption(event) {
   pulseMagma(duration);
 }
 
-/* ===========================================
-   Wire up events on DOMContentLoaded
-   =========================================== */
+/* Wire up events on DOMContentLoaded */
 document.addEventListener("DOMContentLoaded", () => {
   // Initial render
   renderVEI();
