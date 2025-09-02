@@ -76,9 +76,7 @@ function closeModal() {
   modal.setAttribute("aria-hidden", "true");
 }
 
-/* ===========================================
-   Part 2 in action: render + update meter
-   =========================================== */
+/* Part 2 in action: render + update meter */
 
 /** Render the VEI meter and label from currentVEI */
 function renderVEI() {
